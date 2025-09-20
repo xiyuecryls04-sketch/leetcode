@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// 中序遍历（左 → 根 → 右）会得到 BST 的 升序序列。
 
  struct TreeNode {
       int val;
@@ -50,6 +51,18 @@ public:
         
 
     }
+    void inorder(TreeNode *root, vector<int> &res){
+        if(root){
+            inorder(root->left, res);
+            res.push_back(root->val);
+            inorder(root->right, res);
+        }
+    }
+    int kthSmallest2(TreeNode* root, int k) {
+        vector<int> res;
+        inorder(root, res);
+        return res[k-1];
+    }
 };
 
 int main(){
@@ -60,7 +73,9 @@ int main(){
 
     Solution so;
     int res = so.kthSmallest(root, 1);
+    int res1 = so.kthSmallest2(root,1);
     cout << res << endl;
+    cout << res1 << endl;
 
     return 0;
 }
